@@ -134,6 +134,12 @@
             <version>[7.0.0, 7.2.00]</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+
         <!-- excel工具类 -->
         <dependency>
             <groupId>com.wuwenze</groupId>
