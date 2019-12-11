@@ -13,16 +13,31 @@ import io.swagger.annotations.ApiParam;
 public class UserBo {
     @ApiParam(value = "用户id")
     private Long id;
-    @ApiParam(value = "用户名")
+    @ApiParam(value = "用户名",hidden = true)
     private String name;
-    @ApiParam(value = "appId")
+    @ApiParam(value = "appId",hidden = true)
     private String appId;
-    @ApiParam(value = "备注")
+    @ApiParam(value = "备注",hidden = true)
     private String remark;
-    @ApiParam(value = "token")
+    @ApiParam(value = "token",hidden = true)
     private String token;
-    @ApiParam(value = "secret")
+    @ApiParam(value = "secret",hidden = true)
     private String secret;
+    @ApiParam(value = "用户类型 1管理员 2普通成员",hidden = true)
+    private Integer userType;
+
+    public UserBo() {
+    }
+
+    public UserBo(Long id, String name, String appId, String remark, String token, String secret, Integer userType) {
+        this.id = id;
+        this.name = name;
+        this.appId = appId;
+        this.remark = remark;
+        this.token = token;
+        this.secret = secret;
+        this.userType = userType;
+    }
 
     public Long getId() {
         return id;

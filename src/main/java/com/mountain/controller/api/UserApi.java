@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/api/user")
-@Api(description = "用户api")
+//@Api(description = "用户api")
 public class UserApi {
 
     @Autowired
     UserBusiness userBusiness;
 
-    @ApiOperation(value = "测试")
+//    @ApiOperation(value = "测试")
     @GetMapping
     public ResultBean<Object> sign() {
         return ResultBean.defaultSuccess(userBusiness.findOne(1L));

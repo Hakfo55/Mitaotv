@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({RuntimeException.class})
     public ResultBean runtimeExceptionHandler(RuntimeException e) {
         logger.error("{}", e);
-        return new ResultBean(GlobalStatusCode.CODE_500000.code(), GlobalStatusCode.CODE_500000.value());
+        return new ResultBean(GlobalStatusCode.CODE_500000.code(), e.getMessage());
     }
 
 

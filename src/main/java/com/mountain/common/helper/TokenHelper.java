@@ -8,8 +8,10 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.mountain.common.exception.token.TokenException;
 import com.mountain.common.util.response.GlobalStatusCode;
 import org.apache.commons.lang.time.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
@@ -75,5 +77,13 @@ public class TokenHelper {
         } catch (UnsupportedEncodingException e) {
             throw new TokenException(GlobalStatusCode.CODE_400001.code(), GlobalStatusCode.CODE_400001.value());
         }
+    }
+
+    @Autowired
+    HttpServletRequest request;
+
+    public String getToken() {
+        String token = request.getHeader("Authorization");
+        return token;
     }
 }

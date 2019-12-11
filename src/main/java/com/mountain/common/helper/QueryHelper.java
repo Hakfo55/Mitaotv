@@ -71,8 +71,16 @@ public class QueryHelper {
 			if(fixeds != null){
 				Set<Map.Entry<String, Object>> sets = fixeds.entrySet();
 				for(Map.Entry<String, Object> m:sets){
-					result.setParameter(m.getKey(), m.getValue());
-					count.setParameter(m.getKey(), m.getValue());
+                    if (m.getValue() instanceof Integer) {
+                        result.setParameter(m.getKey(), Integer.valueOf(m.getValue().toString()));
+                        count.setParameter(m.getKey(), Integer.valueOf(m.getValue().toString()));
+                    } else if (m.getValue() instanceof Long) {
+                        result.setParameter(m.getKey(), Long.valueOf(m.getValue().toString()));
+                        count.setParameter(m.getKey(), Long.valueOf(m.getValue().toString()));
+                    } else {
+                        result.setParameter(m.getKey(), m.getValue());
+                        count.setParameter(m.getKey(), m.getValue());
+                    }
 				}
 			}
 			if(custom != null){

@@ -30,11 +30,18 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    private ParameterBuilder ticketPar = new ParameterBuilder();
+    private List<Parameter> pars = new ArrayList<Parameter>();
+
+    ApiInfo info = new ApiInfoBuilder()
+            .title("接口文档")
+            .description("接口文档")
+            .version("1.0")
+            .build();
+
     @Bean
     @SuppressWarnings("all")
     public Docket wx() {
-        ParameterBuilder ticketPar = new ParameterBuilder();
-        List<Parameter> pars = new ArrayList<Parameter>();
         ticketPar.name("Authorization").description("jwt token")
                 .modelRef(new ModelRef("string")).parameterType("header")
                 .required(false).build(); //header中的ticket参数非必填，传空也可以
@@ -51,6 +58,32 @@ public class SwaggerConfig {
                 .apiInfo(info)
                 .select()
                 .paths(or(regex("/api/*.*")))
+                .build()
+                .globalOperationParameters(pars);
+    }
+
+    @Bean
+    @SuppressWarnings("all")
+    public Docket wx2() {
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("web")
+                .apiInfo(info)
+                .select()
+                .paths(or(regex("/web/*.*")))
+                .build()
+                .globalOperationParameters(pars);
+    }
+
+    @Bean
+    @SuppressWarnings("all")
+    public Docket wx3() {
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("mitaotv")
+                .apiInfo(info)
+                .select()
+                .paths(or(regex("/mitaotv/*.*")))
                 .build()
                 .globalOperationParameters(pars);
     }

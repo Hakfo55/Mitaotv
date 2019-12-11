@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -126,5 +127,27 @@ public class UserHelper {
     public void logout(String token) {
         deleteKey(prefix + token);
         deleteKey(prefix + token + "_cache");
+    }
+
+    /**
+     * 获取权限url
+     * @param token
+     * @return
+     */
+    public String getValidUrl(String token) {
+        return redis.opsForValue().get(token);
+    }
+
+    //TODO 保存权限
+
+    public Boolean setValidUrl(String token, List<String> list) {
+        //权限集合转json
+        String json = JSON.toJSONString(list);
+        if (token == null) {
+            return false;
+        }
+        //存储到redis
+        redis.opsForValue().set(token,json);
+        return true;
     }
 }
