@@ -53,11 +53,11 @@ public class TokenFilter implements HandlerInterceptor {
             throw new ServiceException(GlobalStatusCode.CODE_400001.code(), GlobalStatusCode.CODE_400001.value());
         }
         //以下五行注释可方便免权限访问
-        String url = httpServletRequest.getServletPath();
-        Boolean valid = valid(url, token);
-        if (!valid) {
-            throw new ServiceException(GlobalStatusCode.CODE_80005.code(), GlobalStatusCode.CODE_80005.value());
-        }
+//        String url = httpServletRequest.getServletPath();
+//        Boolean valid = valid(url, token);
+//        if (!valid) {
+//            throw new ServiceException(GlobalStatusCode.CODE_80005.code(), GlobalStatusCode.CODE_80005.value());
+//        }
         return true;
     }
 

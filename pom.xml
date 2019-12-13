@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mountain</groupId>
-    <artifactId>AgainstCrime</artifactId>
+    <artifactId>Mitaotv</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <name>Mitaotv</name>
@@ -154,5 +154,15 @@
 
     <build>
         <finalName>mitaotv</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.mountain.Server</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+
 </project>

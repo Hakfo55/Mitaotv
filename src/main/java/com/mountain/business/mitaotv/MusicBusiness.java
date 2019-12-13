@@ -15,10 +15,10 @@ public interface MusicBusiness extends CrudBusiness<Music> {
 
 
     /**
-     * 根据状态分页查询艺人列表
+     * 分页查询歌曲列表
      * @return
      */
-    PageResult findListByStatus(Integer page, Integer size, String status);
+    PageResult findList(Integer page, Integer size, String status,String singer);
 
     /**
      * 更新
@@ -26,5 +26,12 @@ public interface MusicBusiness extends CrudBusiness<Music> {
      * @return
      */
     Music update(Music music);
+
+
+    /**
+     * 查找歌手列表
+     * @return
+     */
+    PageResult singerList(Integer page, Integer size,String status);
 
 }

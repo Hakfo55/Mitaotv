@@ -32,7 +32,7 @@ public class MusicController {
 
     @GetMapping("/findbyid")
     @ApiOperation(value = "通过id查询音乐")
-//    @IgnoreSecurity
+    @IgnoreSecurity
     public ResultBean<Object> findById(Long id) {
         return ResultBean.defaultSuccess(business.findOne(id));
     }
@@ -53,12 +53,13 @@ public class MusicController {
 
     @GetMapping("/list")
     @ApiOperation(value = "分页查询音乐列表")
-//    @IgnoreSecurity
+    @IgnoreSecurity
     public ResultBean<Object> list(@ApiParam(name = "page",value = "当前页数") @RequestParam(name = "page",defaultValue = "1") Integer page,
                                    @ApiParam(name = "size",value = "每页数量")@RequestParam(name = "size",defaultValue = "10") Integer size,
-                                   @ApiParam(name = "state",value = "状态")@RequestParam(name = "state",defaultValue = "0") String state){
+                                   @ApiParam(name = "state",value = "状态")@RequestParam(name = "state",defaultValue = "0") String state,
+                                   @ApiParam(name = "singer",value = "歌手名字")@RequestParam(name = "singer",required = false) String singer){
 
-        return ResultBean.defaultSuccess(business.findListByStatus(page,size,state));
+        return ResultBean.defaultSuccess(business.findList(page,size,state,singer));
     }
 
     @DeleteMapping("/delete")
@@ -67,5 +68,14 @@ public class MusicController {
     public ResultBean<Object> delete(Long id) throws ServiceException {
         business.delete(id);
         return ResultBean.defaultSuccess();
+    }
+
+    @ApiOperation("获取歌手列表")
+    @GetMapping("/singer")
+    @IgnoreSecurity
+    public ResultBean<Object> singer(@ApiParam(name = "page",value = "当前页数") @RequestParam(name = "page",defaultValue = "1") Integer page,
+                                     @ApiParam(name = "size",value = "每页数量")@RequestParam(name = "size",defaultValue = "10") Integer size,
+                                     @ApiParam(name = "state",value = "状态")@RequestParam(name = "state",defaultValue = "0") String state){
+        return ResultBean.defaultSuccess(business.singerList(page, size, state));
     }
 }

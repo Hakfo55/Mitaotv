@@ -21,7 +21,7 @@ public class QiniuyunTokenController {
 
     @GetMapping("/gettoken")
     @ApiOperation(value = "七牛云token")
-//    @IgnoreSecurity
+    @IgnoreSecurity
     public ResultBean<Object> getToken(){
         return ResultBean.defaultSuccess(QiniuyunTokenUtil.getUpToken());
     }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,12 +30,17 @@ import java.util.List;
 public class MusicBusinessImpl extends CrudBusinessImpl<Music,MusicRepository> implements MusicBusiness {
 
     @Override
-    public PageResult findListByStatus(Integer page, Integer size, String status) {
+    public PageResult findList(Integer page, Integer size, String status,String singer) {
         List<Sort.Order> orders=new ArrayList<>();
         orders.add(new Sort.Order(Sort.Direction.ASC,"priority"));
         orders.add(new Sort.Order(Sort.Direction.DESC,"updatedAt"));
         PageRequest pageRequest = PageRequest.of(page-1,size, Sort.by(orders));
-        Page<Music> musicPage = repository.findByStatus(pageRequest,status);
+        Page<Music> musicPage = null;
+        if (StringUtils.isEmpty(singer)){
+            musicPage = repository.findByStatus(pageRequest,status);
+        }else {
+            musicPage = repository.findBySingerAndStatus(pageRequest,singer,status);
+        }
         return new PageResult(page,musicPage);
     }
 
@@ -47,6 +53,13 @@ public class MusicBusinessImpl extends CrudBusinessImpl<Music,MusicRepository> i
         music.setStatus(oldMusic.getStatus());
         music.setUpdatedAt(new Date());
         return repository.save(music);
+    }
+
+    @Override
+    public PageResult singerList(Integer page, Integer size,String status) {
+        PageRequest pageRequest = PageRequest.of(page-1,size);
+        Page<String> musicPage = repository.singerList(pageRequest,status);
+        return new PageResult(page,musicPage);
     }
 
 }

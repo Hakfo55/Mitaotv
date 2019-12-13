@@ -32,7 +32,7 @@ public class VideoController {
 
     @GetMapping("/findbyid")
     @ApiOperation(value = "通过id查询视频")
-//    @IgnoreSecurity
+    @IgnoreSecurity
     public ResultBean<Object> findById(Long id) {
         return ResultBean.defaultSuccess(business.findOne(id));
     }
@@ -61,7 +61,7 @@ public class VideoController {
 
     @GetMapping("/list")
     @ApiOperation(value = "分页查询视频列表")
-//    @IgnoreSecurity
+    @IgnoreSecurity
     public ResultBean<Object> list(@ApiParam(name = "page",value = "当前页数") @RequestParam(name = "page",defaultValue = "1") Integer page,
                                    @ApiParam(name = "size",value = "每页数量")@RequestParam(name = "size",defaultValue = "10") Integer size,
                                    @ApiParam(name = "state",value = "状态")@RequestParam(name = "state",defaultValue = "0") String state){

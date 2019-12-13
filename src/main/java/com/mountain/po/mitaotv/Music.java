@@ -23,12 +23,15 @@ public class Music extends BaseEntity {
     private Long id;
 
     //歌曲名字
+    @NotEmpty(message = "歌曲名字不能为空")
     @ApiModelProperty(value = "歌曲名字")
     private String name;
     //歌手
+    @NotEmpty(message = "歌手名字不能为空")
     @ApiModelProperty(value = "歌手名字")
     private String singer;
     //CD封面
+    @NotEmpty(message = "封面图不能为空")
     @ApiModelProperty(value = "CD封面图片链接")
     private String cdCoverUrl;
     //歌曲链接

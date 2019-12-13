@@ -31,14 +31,14 @@ public class CooperationController {
 
     @GetMapping("/findbyid")
     @ApiOperation(value = "通过id查询单个商务合作图片")
-//    @IgnoreSecurity
+    @IgnoreSecurity
     public ResultBean<Object> findById(@RequestParam("id") Long id){
         return ResultBean.defaultSuccess(business.findOne(id));
     }
 
     @GetMapping("/list")
     @ApiOperation(value = "根据状态分页查询列表")
-//    @IgnoreSecurity
+    @IgnoreSecurity
     public ResultBean<Object> list(@ApiParam(name = "page",value = "当前页数") @RequestParam(name = "page",defaultValue = "1") Integer page,
                                    @ApiParam(name = "size",value = "每页数量")@RequestParam(name = "size",defaultValue = "10") Integer size,
                                    @ApiParam(name = "state",value = "状态")@RequestParam(name = "state",defaultValue = "0") String state,
